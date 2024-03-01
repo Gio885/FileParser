@@ -22,7 +22,7 @@ public class CsvParser extends FileParser {
         try {
             Reader in = new FileReader(loadFile());
             lista = new ArrayList<>();
-            List<CSVRecord> valori = CSVFormat.DEFAULT.builder().setCommentMarker('-').setDelimiter(";").setEscape('\\').build().parse(in).getRecords();
+            List<CSVRecord> valori = CSVFormat.newFormat(';').parse(in).getRecords();
             List<Method> metodiUtente = new ArrayList<>(Arrays.asList(Utente.class.getDeclaredMethods())).stream()
                     .filter(metodo -> metodo.getAnnotation(Order.class) != null)
                     .sorted(Comparator.comparingInt(metodo -> metodo.getAnnotation(Order.class).value()))
@@ -64,8 +64,8 @@ public class CsvParser extends FileParser {
             ByteArrayInputStream s = new ByteArrayInputStream(new FileInputStream(loadFile()).readAllBytes());
             lista = new ArrayList<>();
             Reader in = new InputStreamReader(s);
-            List<CSVRecord> valori = CSVFormat.DEFAULT.builder().setDelimiter(';').setEscape('\\').build().parse(in).getRecords();
-            List<Method> metodiUtente = new ArrayList<>(Arrays.asList(Utente.class.getDeclaredMethods())).stream()
+            List<CSVRecord> valori = CSVFormat.newFormat(';').parse(in).getRecords();
+                    List<Method> metodiUtente = new ArrayList<>(Arrays.asList(Utente.class.getDeclaredMethods())).stream()
                     .filter(metodo -> metodo.getAnnotation(Order.class) != null)
                     .sorted(Comparator.comparingInt(metodo -> metodo.getAnnotation(Order.class).value()))
                     .collect(Collectors.toList());
