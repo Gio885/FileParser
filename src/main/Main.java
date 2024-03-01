@@ -14,6 +14,7 @@ public class Main {
             String percorsoFileEXCEL = "C:\\Sviluppo\\FileParserDoc\\fileExcelRead.xlsx";
             FileParser fileParser = FileFactory.fileFactory(percorsoFileEXCEL);
             fileParser.readData();
+            System.out.println("ok");
             new UtenteDao().saveJson(fileParser.getLista(), "C:\\Sviluppo\\FileParserDoc\\JsonUscitaDatiFromEXCEL.csv");
             //new UtenteDao().saveUser(fileParser.getLista());
              /*CsvParser csvParser = new CsvParser("D:\\FileParser\\fileTextRead.csv");
